@@ -49,7 +49,7 @@
 
                         <div class="card mt-3 p-3" >
                                 <label for="costcenter" class="form-label">Pay Code Hours</label>
-                                <input type="number" class="form-control" id="paycode_hours" name="paycode_hours" >
+                                <input type="number" class="form-control" id="paycode_hours" name="paycode_hours" max="24" step="0.01">
                             </div>
 
 
