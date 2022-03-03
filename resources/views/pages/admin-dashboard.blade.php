@@ -13,7 +13,7 @@
                 <div class="card-header">Time Submitted</div>
 
                 <div class="card-body">
-                    <table class="table table-hover" id="datatable3">
+                    <table class="table table-hover" id="datatable-admin">
                         <thead>
                             <tr>
                                 <th>User</th>

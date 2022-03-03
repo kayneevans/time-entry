@@ -126,7 +126,7 @@
                 <div class="card-header">Pay Code Submitted - For Team Members</div>
 
                 <div class="card-body">
-                    <table class="table table-hover" id="datatable2">
+                    <table class="table table-hover" id="datatable3">
                         <thead>
                             <tr>
                                 <th>User</th>
@@ -151,7 +151,7 @@
                                 <td> {{ $enteredPayCodeTM->paycode_hours }} </td>
                                 @if (auth()->check())
                                     @if (auth()->user()->isTimekeeper())
-                                        <th><a href="time/timekeeper/{{ $enteredPayCodeTM->time_id }}" class="btn btn-primary btn-sm">Edit</a></th>
+                                        <th><a href="/paycode/{{ $enteredPayCodeTM->paycode_entry_id }}" class="btn btn-primary btn-sm">Edit</a></th>
                                     @else
 
                                     @endif

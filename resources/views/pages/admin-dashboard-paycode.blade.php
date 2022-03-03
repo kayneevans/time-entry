@@ -13,7 +13,7 @@
                 <div class="card-header">Pay Code Submitted</div>
 
                 <div class="card-body">
-                    <table class="table table-hover" id="datatable3">
+                    <table class="table table-hover" id="datatable-admin">
                         <thead>
                             <tr>
                                 <th>User</th>
@@ -26,7 +26,7 @@
                                 <th>Updated At</th>
                                 @if (auth()->check())
                                     @if (auth()->user()->isAdmin())
-                                        <th>Edit</th>
+                                        <th class="not-export-col">Edit</th> 
                                     @else
 
                                     @endif
@@ -47,14 +47,14 @@
                                 
                                 @if (auth()->check())
                                     @if (auth()->user()->isTimekeeper())
-                                        <th><a href="paycode/{{ $paycodeentry->paycode_entry_id }}" class="btn btn-primary btn-sm">Edit</a></th>
+                                        <th ><a href="paycode/{{ $paycodeentry->paycode_entry_id }}" class="btn btn-primary btn-sm">Edit</a></th>
                                     @else
 
                                     @endif
                                 @endif
                             </tr>
                             @endforeach
-                        </tbody>
+                        </tbody> 
                     </table>
 
                 </div>
