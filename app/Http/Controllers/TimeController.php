@@ -7,6 +7,7 @@ Use Auth;
 use Illuminate\Http\Request;
 use App\Models\WorkRule;
 use App\Models\TimeEntry;
+use App\Models\User;
 use DB;
 use Carbon\Carbon;
 
@@ -30,6 +31,7 @@ class TimeController extends Controller
         //
         $workrule = WorkRule::all();
         
+        
         return view('pages.time',['workrule'=>$workrule]);
     }
 
@@ -37,7 +39,20 @@ class TimeController extends Controller
     {
         //
         $workrule = WorkRule::all();
-        return view('pages.timetk',['workrule'=>$workrule]);
+        $user = Auth::user(); 
+
+        $people = DB::select(
+            "
+                SELECT distinct
+                    users.id,
+                    users.name
+
+                FROM users 
+                
+                where users.id <> $user->id
+            "); 
+
+        return view('pages.timetk',['workrule'=>$workrule, 'people'=>$people]);
     }
 
     /**
@@ -67,8 +82,8 @@ class TimeController extends Controller
         ]);
 
         $time_entry = new TimeEntry;
-
-        $time_entry->user_id = $request->input('created_by');
+        
+        $time_entry->user_id = $request->input('user_id');
         $time_entry->punch_type = $request->input('PunchType');
         $time_entry->punch_date = $request->input('date');
         $time_entry->punch_time = $request->input('time');
@@ -76,7 +91,7 @@ class TimeController extends Controller
         $time_entry->cost_center = $request->input('costcenter');
         $time_entry->work_rule = $request->input('workrule');
         $time_entry->position =  $request->input('position');
-        $time_entry->created_by = $request->input('created_by');
+        $time_entry->created_by = $request->input('user_id');
         
         
 
@@ -184,8 +199,11 @@ class TimeController extends Controller
         //
         $workrule = WorkRule::all();
 
-        $punches = TimeEntry::where('deleted', Null)->get();
-        
+        $punches5 = TimeEntry::where('deleted', Null)->get();
+
+        $punches = DB::table('TimeEntry')
+            ->leftJoin('users', 'TimeEntry.user_id', '=', 'users.id')
+            ->get();
 
         return view('pages.admin-dashboard', compact(['punches', 'workrule']));
 

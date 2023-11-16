@@ -17,6 +17,7 @@
                         <thead>
                             <tr>
                                 <th>User</th>
+                                <th>User Name</th>
                                 <th>Paycode</th>
                                 <th>Date</th>
                                 <th>Hours</th>
@@ -37,6 +38,7 @@
                             @foreach($paycodeentry as $paycodeentry)
                             <tr>
                                 <td> {{ $paycodeentry->user_id }} </td>
+                                <td> {{ $paycodeentry->name }} </td>
                                 <td> {{ $paycodeentry->paycode }} </td>
                                 <td> {{ $paycodeentry->paycode_date }} </td>
                                 <td> {{ $paycodeentry->paycode_hours }}</td>

@@ -7,7 +7,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h1>Enter Time</h1>
+                    <h1>Enter Time - Punch ID: {{$punch->time_id}}</h1>
                 </div>
 
                 <div class="card-body">
@@ -15,6 +15,7 @@
 
                     <form method="POST" action="/time/timekeeper/{{$punch->time_id}}" class="formOptions">
                         @csrf
+                      
 
                         <div class="card p-3" >
                                 <label for="costcenter" class="form-label">Team Member ID</label>

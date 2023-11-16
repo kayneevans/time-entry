@@ -29,15 +29,22 @@ class HomeController extends Controller
     {
         $user = auth()->id();
 
-        $enteredTime = TimeEntry::where('user_id', $user)
-                    ->get();
+        $enteredTime = DB::table('TimeEntry')
+                        ->leftJoin('users', 'TimeEntry.user_id', '=', 'users.id')
+                        ->where('user_id', $user)
+                        ->get();
+                    
         
-        $enteredTimeTM = TimeEntry::where('user_id', '!=', $user)
+        $enteredTimeTM = DB::table('TimeEntry')
+                            ->leftJoin('users', 'TimeEntry.user_id', '=', 'users.id')
+                            ->where('user_id', '!=', $user)
                             ->where('created_by', $user)
                             ->orWhere('updated_by', $user)
                             ->get();
         
-        $enteredPayCodeTM = PayCodeEntry::where('user_id', '!=', $user)
+        $enteredPayCodeTM = DB::table('PayCodeEntry')
+                            ->leftJoin('users', 'PayCodeEntry.user_id', '=', 'users.id')
+                            ->where('user_id', '!=', $user)
                             ->where('created_by', $user)
                             ->orWhere('updated_by', $user)
                             ->get();

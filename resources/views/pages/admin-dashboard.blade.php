@@ -17,6 +17,7 @@
                         <thead>
                             <tr>
                                 <th>User</th>
+                                <th>User Name</th>
                                 <th>Punch Type</th>
                                 <th>Date</th>
                                 <th>Time</th>
@@ -39,12 +40,13 @@
                             @foreach($punches as $punch)
                             <tr>
                                 <td> {{ $punch->user_id }} </td>
+                                <td> {{ $punch->name }} </td>
                                 <td> {{ $punch->punch_type }} </td>
                                 <td> {{ $punch->punch_date }} </td>
                                 <td> {{ $punch->punch_time }}</td>
-                                <td> @empty($punch->cost_center) @else {{ $punch->cost_center }} -
+                                <td> @empty($punch->cost_center) @else {{ $punch->cost_center }} 
                                     @endempty
-                                    @empty($punch->work_rule) @else {{ $punch->work_rule }} - @endempty
+                                    @empty($punch->work_rule) @else {{ $punch->work_rule }}  @endempty
                                     @empty($punch->position) @else {{ $punch->position }} @endempty
                                 </td>
                                 <td> {{ $punch->attestation }} </td>

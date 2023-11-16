@@ -26,9 +26,19 @@ class PayCodeController extends Controller
     public function index()
     {
         //
+        $user = Auth::user(); 
         $paycode = PayCode::all();
+        $people = DB::select(
+            "
+                SELECT distinct
+                    users.id,
+                    users.name
+
+                FROM users   
+                where users.id <> $user->id             
+            "); 
         
-        return view('pages.paycode',['paycode'=>$paycode]);
+        return view('pages.paycode',['paycode'=>$paycode, 'people'=>$people]);
     }
 
     /**
@@ -127,8 +137,11 @@ class PayCodeController extends Controller
     {
         //
         $paycode = PayCode::all();
-
-        $paycodeentry = PayCodeEntry::where('deleted', Null)->get();
+    
+        
+        $paycodeentry = DB::table('PayCodeEntry')
+            ->leftJoin('users', 'PayCodeEntry.user_id', '=', 'users.id')
+            ->get();
         
 
         return view('pages.admin-dashboard-paycode', compact(['paycodeentry', 'paycodeentry']));

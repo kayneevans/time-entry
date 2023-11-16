@@ -18,7 +18,7 @@
 
                         <div class="card p-3" >
                                 <label for="costcenter" class="form-label">Team Member</label>
-                                <input type="text" class="form-control" id="user_id" name="user_id" value="{{ Auth::user()->id }}" disabled />
+                                <input type="text" class="form-control" id="auth_user_id" name="auth_user_id" value="{{ Auth::user()->id }}" disabled />
                             </div>
                         
                         <div class="card p-3 mt-3">
@@ -44,10 +44,10 @@
                         </div>
 
                         <div class="form-check form-group mt-3 card p-3" id="time-out" style="display: none;">
-                            <input class="form-check-input" type="checkbox" value="1" id="attestation" name="attestation">
+                            <!-- <input class="form-check-input" type="checkbox" value="1" id="attestation" name="attestation">
                             <label class="form-check-label" for="flexCheckDefault">
                                 I am attesting that I needed to return to work early due to a business related activity and did not take a full 30 minute break. 
-                            </label>
+                            </label> -->
                         </div>
 
 
@@ -81,6 +81,7 @@
                         </div>
 
                         <div class="mt-3" id="enterBtn" style="display: none; width: 100%">
+                            <input type="text" class="form-control" id="user_id" name="user_id" value="{{ Auth::user()->id }}" style="display: none;"/>
                             <input type="submit" value="Submit" class="btn btn-primary btn-lg" style="width: 100%">
                         </div>
 

@@ -32,17 +32,17 @@
 
             </div>
             <div class="card mt-3">
-                <div class="card-header">Time Submitted</div>
+                <div class="card-header">My Time Submitted</div>
 
                 <div class="card-body">
                     <table class="table table-hover" id="datatable">
                         <thead>
                             <tr>
                                 <th>User</th>
+                                <th>Name</th>
                                 <th>Punch Type</th>
                                 <th>Date - Time</th>
                                 <th>Transfer</th>
-                                <th>Attestation</th>
                                 
                             </tr>
                         </thead>
@@ -50,12 +50,13 @@
                             @foreach($enteredTime as $timeentered)
                             <tr>
                                 <td> {{ $timeentered->user_id }} </td>
+                                <td> {{ $timeentered->name  }} </td>
                                 <td> {{ $timeentered->punch_type }} </td>
                                 <td> {{ $timeentered->punch_date }} - {{ $timeentered->punch_time }}</td>
                                 <td> @empty($timeentered->cost_center) @else {{ $timeentered->cost_center }} - @endempty
                                     @empty($timeentered->work_rule) @else {{ $timeentered->work_rule }} - @endempty
                                     @empty($timeentered->position) @else {{ $timeentered->position }} @endempty </td>
-                                <td> {{ $timeentered->attestation }} </td>
+                       
                                 
                             </tr>
                             @endforeach
@@ -74,10 +75,12 @@
                         <thead>
                             <tr>
                                 <th>User</th>
+                                <th>Name</th>
                                 <th>Punch Type</th>
                                 <th>Date - Time</th>
                                 <th>Transfer</th>
-                                <th>Attestation</th>
+                                <th>User Created</th>
+                                <th>User Updated</th>
                                 @if (auth()->check())
                                     @if (auth()->user()->isTimekeeper())
                                         <th>Edit</th>
@@ -91,14 +94,16 @@
                             @foreach($enteredTimeTM as $timeenteredTM)
                             <tr>
                                 <td> {{ $timeenteredTM->user_id }} </td>
+                                <td> {{ $timeenteredTM->name }} </td>
                                 <td> {{ $timeenteredTM->punch_type }} </td>
                                 <td> {{ $timeenteredTM->punch_date }} - {{ $timeenteredTM->punch_time }}</td>
                                 <td> @empty($timeenteredTM->cost_center) @else {{ $timeenteredTM->cost_center }} -
                                     @endempty
-                                    @empty($timeenteredTM->work_rule) @else {{ $timeenteredTM->work_rule }} - @endempty
-                                    @empty($timeenteredTM->position) @else {{ $timeenteredTM->position }} @endempty
+                                    @empty($timeenteredTM->work_rule) @else {{ $timeenteredTM->work_rule }} @endempty
+                                    @empty($timeenteredTM->position) @else - {{ $timeenteredTM->position }} @endempty
                                 </td>
-                                <td> {{ $timeenteredTM->attestation }} </td>
+                                <td> {{ $timeenteredTM->created_by }} </td>
+                                <td> {{ $timeenteredTM->updated_by }} </td>
                                 @if (auth()->check())
                                     @if (auth()->user()->isTimekeeper())
                                         <th><a href="time/timekeeper/{{ $timeenteredTM->time_id }}" class="btn btn-primary btn-sm">Edit</a></th>
@@ -130,9 +135,12 @@
                         <thead>
                             <tr>
                                 <th>User</th>
+                                <th>Name</th>
                                 <th>Pay Code</th>
                                 <th>Date </th>
                                 <th>Hours</th>
+                                <th>User Created</th>
+                                <th>User Edited</th>
                                 @if (auth()->check())
                                     @if (auth()->user()->isTimekeeper())
                                         <th>Edit</th>
@@ -146,9 +154,12 @@
                             @foreach($enteredPayCodeTM as $enteredPayCodeTM)
                             <tr>
                                 <td> {{ $enteredPayCodeTM->user_id }} </td>
+                                <td> {{ $enteredPayCodeTM->name }} </td>
                                 <td> {{ $enteredPayCodeTM->paycode }} </td>
                                 <td> {{ $enteredPayCodeTM->paycode_date }} </td>
                                 <td> {{ $enteredPayCodeTM->paycode_hours }} </td>
+                                <td> {{ $enteredPayCodeTM->created_by }} </td>
+                                <td> {{ $enteredPayCodeTM->updated_by }} </td>
                                 @if (auth()->check())
                                     @if (auth()->user()->isTimekeeper())
                                         <th><a href="/paycode/{{ $enteredPayCodeTM->paycode_entry_id }}" class="btn btn-primary btn-sm">Edit</a></th>

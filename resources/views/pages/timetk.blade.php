@@ -16,10 +16,21 @@
                     <form method="POST" action="/time/timekeeper" class="formOptions">
                         @csrf
 
-                        <div class="card p-3" >
+                        <!-- <div class="card p-3" >
                                 <label for="costcenter" class="form-label">Team Member ID</label>
                                 <input type="text" class="form-control" id="user_id" name="user_id" >
-                            </div>
+                            </div> -->
+
+
+                        <div class="card p-3" >
+                            <label for="user" class="form-label">Team Member</label>
+                            <select class="form-control" id="user_id" name="user_id">
+                                <option value="" disabled selected>Select User</option>
+                                @foreach($people as $person)
+                                    <option value="{{ $person->id }}">{{ $person->id }}--{{ $person->name }}</option>
+                                @endforeach 
+                            </select>
+                        </div>
                         
                         <div class="card p-3 mt-3">
                             <label for="PunchType" class="form-label">Punch Type</label>
@@ -44,10 +55,10 @@
                         </div>
 
                         <div class="form-check form-group mt-3 card p-3" id="time-out" style="display: none;">
-                            <input class="form-check-input" type="checkbox" value="1" id="attestation" name="attestation">
+                            <!-- <input class="form-check-input" type="checkbox" value="1" id="attestation" name="attestation">
                             <label class="form-check-label" for="flexCheckDefault">
                                 I am attesting that I needed to return to work early due to a business related activity and did not take a full 30 minute break. 
-                            </label>
+                            </label> -->
                         </div>
 
 

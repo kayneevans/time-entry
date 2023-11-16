@@ -17,9 +17,14 @@
                         @csrf
 
                         <div class="card p-3" >
-                                <label for="costcenter" class="form-label">Team Member ID</label>
-                                <input type="text" class="form-control" id="user_id" name="user_id" >
-                            </div>
+                            <label for="user" class="form-label">Team Member</label>
+                            <select class="form-control" id="user_id" name="user_id">
+                                <option value="" disabled selected>Select User</option>
+                                @foreach($people as $person)
+                                    <option value="{{ $person->id }}">{{ $person->id }}--{{ $person->name }}</option>
+                                @endforeach 
+                            </select>
+                        </div>
 
                         <div id="transfer">
 
